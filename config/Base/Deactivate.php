@@ -2,7 +2,7 @@
 /**
 * @package LgaddPlugin
 */
-namespace Lgadd;
+namespace Lgadd\Base;
 class Deactivate{
     public static function deactivate(){
         //create an static function to Deactivate
