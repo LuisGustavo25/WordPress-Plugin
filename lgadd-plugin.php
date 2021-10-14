@@ -37,10 +37,16 @@ defined( 'ABSPATH' ) or die('You cant acces this file');
 //can be accesed only within the Class or Exntends of that Class
 //Private
 //can be accesed only within the Class itself
+
+if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){
+    require_once(dirname(__FILE__). '/vendor/autoload.php');
+}
+
+use Lgadd\Activate;
+
 if(!class_exists('LgaddPlugin')){
     class LgaddPlugin 
     {
-        
         public $tittle;    
         function __construct(){
             $this->tittle = plugin_basename(__FILE__);
@@ -78,12 +84,13 @@ if(!class_exists('LgaddPlugin')){
         function activate(){
             //generated  CPT
             $this->custom_post_type();
-            //flush rewrite rules
-            LgaddPluginActivate::activate;
+            //require the file directory path & flush rewrite rules
+            //require_once plugin_dir_path(__FILE__) . 'Lgadd/LgaddPlugin-activate.php';
+            Activate::activate();
         }
         function deactive(){
             //flush rewrite rules
-            LgaddPluginDeactivate::deactivate;
+            Deactivate::deactivate();
         }
         function uninstall(){
             //delete CPT
@@ -96,18 +103,18 @@ if(!class_exists('LgaddPlugin')){
         }
     }
 
-
     $lgaddPlugin = new LgaddPlugin();
     $lgaddPlugin->register();
     //static method:
     //LgaddPlugin::register();
 
     //activation
-    require_once plugin_dir_path(__FILE__) . 'config/LgaddPlugin-activate.php';
-    register_activation_hook  (__FILE__ , array( 'LgaddPluginActivate' , 'activate'));
+    //We do not need the dir path, because we are using the Static Method
+    //require_once plugin_dir_path(__FILE__) . 'config/Activate.php';
+    register_activation_hook  (__FILE__ , array( $lgaddPlugin , 'activate'));
     //deactivation
-    require_once plugin_dir_path(__FILE__) . 'config/LgaddPlugin-deactivate.php';
-    register_deactivation_hook  (__FILE__ , array( 'LgaddPluginDeactivate' , 'deactivate'));
+    //require_once plugin_dir_path(__FILE__) . 'config/LgaddPlugin-deactivate.php';
+    register_deactivation_hook  (__FILE__ , array( 'Deactivate' , 'deactivate'));
     //uninstall
     register_uninstall_hook (__FILE__ , array($lgaddPlugin , 'uninstall')); 
 }
