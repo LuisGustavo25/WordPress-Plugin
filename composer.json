@@ -1,0 +1,17 @@
+{
+    "name": "acost/lgadd-plugin",
+    "description": "Sample Plugin to practice WordPress & PHP",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Luis Gustavo",
+            "email": "acostarluisg@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4":{ "Lgadd\\":  "./config" }
+    }
+}
