@@ -16,6 +16,6 @@ class Admin{
     }
 
     public function admin_index(){
-        require_once plugin_dir_path . 'templates/admin.php';
+        require_once PLUGIN_PATH . 'templates/Admin.php';
     }
 }

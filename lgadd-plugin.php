@@ -27,10 +27,13 @@
     //    exit;
     //}
 
-if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){
-    require_once(dirname(__FILE__). '/vendor/autoload.php');
+if( file_exists(dirname ( __FILE__ ) . '/vendor/autoload.php') ){
+    require_once(dirname( __FILE__ ) . '/vendor/autoload.php');
 }
 
-if(class_exists('Lgadd\\Init')){
+define ( 'PLUGIN_PATH' , plugin_dir_path( __FILE__ ) );
+define ( 'PLUGIN_URL'  , plugin_dir_url ( __FILE__ ) );
+
+if(class_exists( 'Lgadd\\Init' )){
     Lgadd\Init::register_services();
 }

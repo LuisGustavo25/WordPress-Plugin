@@ -11,7 +11,9 @@ class Enqueue{
     }
     function enqueue(){
         //enqueue all the scripts:
-        wp_enqueue_style( 'mypluginstyle' , plugins_url( '/assets/style.css' ,__FILE__));
-        wp_enqueue_script( 'mypluginscript' , plugins_url( '/assets/script.js' ,__FILE__));
+        //The PLUGIN_URL is the URL of the Plugin from the constant in Lgadd-plugin.php
+        //IMPORTANT THE PLUGIN_URL CONTAINS THE / AT THE END OF THE URL
+        wp_enqueue_style( 'mypluginstyle' ,   PLUGIN_URL . 'assets/style.css ' );
+        wp_enqueue_script( 'mypluginscript' , PLUGIN_URL . 'assets/script.js ' );
     }
 }
