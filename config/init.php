@@ -4,10 +4,51 @@
  */
 namespace Lgadd;
 
-class Init{
-    public static function register_services(){
-        echo 'ssssssssssssssssssssssssssAAAAA';
+final class Init{
+
+    /**
+     * Store all the classes inside an array
+     * @return array full of list of classes, is an reducer way to do it
+     */
+
+    public static function get_services(){
+        return
+        [
+            Pages\Admin::class
+        ];
     }
+
+    /**
+     * If and only if the class exist
+     * and loop through the classes to initialize
+     * and call the register() method if this exist 
+     * @return
+     */
+
+    public static function register_services(){
+
+        foreach ( self::get_services() as $class  ){
+            //var_dump( $class ) ; die();
+            $service = self::instantiate ( $class );
+            if ( method_exists ( $service , 'register' ) ){
+                $service -> register();
+            }
+        }
+    }
+
+    /**
+     * Initialize the class
+     * @param class $class from the services array
+     * @return class instance new instance of the class
+     */
+
+    private static function instantiate ( $class ){
+        
+        $service = new $class();
+
+        return $service;
+    }
+
 }
 
 // use Lgadd\Activate;

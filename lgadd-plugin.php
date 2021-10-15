@@ -34,4 +34,3 @@ if(file_exists(dirname(__FILE__) . '/vendor/autoload.php')){
 if(class_exists('Lgadd\\Init')){
     Lgadd\Init::register_services();
 }
-
